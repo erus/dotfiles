@@ -1,0 +1,144 @@
+# -*- conf -*-
+#
+# ~/.conkyrc - Conky configuration file
+#
+# Inspired and adapted from Henrik Brix Andersen
+#
+
+# do not fork to background
+background no
+
+# font settings
+use_xft yes
+font snap-8
+#uppercase no
+#use_spacer yes
+
+# update every 3 secs
+update_interval 3
+
+# stay running forever
+total_run_times 0
+
+# draw to root window
+own_window no
+
+# avoid flickering
+double_buffer yes
+
+# size
+minimum_size 1440 900
+maximum_width 1440
+
+# position
+alignment top_left
+gap_x 0
+gap_y 0
+
+# colors
+default_color white
+default_shade_color black
+default_outline_color black
+color0 bebebe
+color1 5f5f5f
+
+# borders
+draw_borders no
+draw_graph_borders no
+
+# shades
+draw_shades yes
+
+# outline
+draw_outline no
+
+# buffers
+no_buffers yes
+
+# sampling
+cpu_avg_samples 2
+net_avg_samples 2
+
+# configuration
+TEXT
+${voffset 75}${offset 847}${color0}LCD
+${offset 847} Brightness:${exec calc `cat /sys/devices/virtual/backlight/acpi_video0/actual_brightness`+3}0%
+
+${voffset 285}${offset 40}Activity
+${offset 45}Process : $running_processes / $processes
+${offset 45}${top name 1}
+${voffset -10}${offset 145}${alignr 1255}${top cpu 1}%
+${offset 45}${top name 2}
+${voffset -10}${offset 145}${alignr 1255}${top cpu 2}%
+${offset 45}${top name 3}
+${voffset -10}${offset 145}${alignr 1255}${top cpu 3}%
+${offset 45}${top name 4}
+${voffset -10}${offset 145}${alignr 1255}${top cpu 4}%
+${offset 45}${top name 5}
+${voffset -10}${offset 145}${alignr 1255}${top cpu 5}%
+
+${voffset 0}${offset 40}Memory
+${offset 45}${top_mem name 1}
+${voffset -10}${offset 145}${alignr 1255}${top_mem mem_res 1}
+${offset 45}${top_mem name 2}
+${voffset -10}${offset 145}${alignr 1255}${top_mem mem_res 2}
+${offset 45}${top_mem name 3}
+${voffset -10}${offset 145}${alignr 1255}${top_mem mem_res 3}
+${offset 45}${top_mem name 4}
+${voffset -10}${offset 145}${alignr 1255}${top_mem mem_res 4}
+${offset 45}${top_mem name 5}
+${voffset -10}${offset 145}${alignr 1255}${top_mem mem_res 5}
+
+${voffset -195}${offset 895}MPD
+${offset 895} ${if_empty $mpd_smart}Now Losing: The Game${else}Now $mpd_status: $mpd_smart ($mpd_elapsed/$mpd_length)${endif}
+
+${voffset 22}${offset 1083}Memory
+${offset 1083} RAM: ${alignr 235}$mem ($memperc%)
+${offset 1083} Swap: ${alignr 235}$swap ($swapperc%)
+
+${voffset 147}${offset 1175}Disk
+${offset 1175} I/O: $diskio
+${offset 1175} ${diskiograph 24,128 3f3f3f 5f5f5f}
+
+${voffset 44}${offset 152}System
+${offset 152} $nodename $kernel
+${offset 152} Uptime: $uptime  Load: $loadavg
+
+${voffset 7}${offset 1145}Power
+${offset 1145} The power supply is $acpiacadapter
+${offset 1145} ${if_match ${battery_short BAT1} == U}discharging ${exec echo `cut -c 1-4 /sys/class/power_supply/BAT1/charge_now`/32 | bc}%${else}${battery BAT1}${endif}
+
+${voffset -7}${offset 300}CPU - GPU
+${offset 300} Frequency: $freq_g GHz
+${offset 300} Temperature CPU: ${exec sensors | grep 0: | cut -c15-16} C
+${offset 300} Temperature GPU: ${exec /home/erus/.scripts/tempcg} C 
+${offset 300} Load: $cpu%
+${offset 300} ${cpugraph cpu0 24,256 3f3f3f 5f5f5f}
+
+${voffset -63}${offset 1105}WiFi (wlan0) - ${wireless_essid wlan0}
+${offset 1105} IPv4: ${tail /tmp/.ip 1}
+${offset 1105} Down: ${downspeedf wlan0} k/s  Up: ${upspeedf wlan0} k/s
+${offset 1105} ${downspeedgraph wlan0 12,210 3f3f3f 5f5f5f}
+${offset 1105}${voffset -3} ${upspeedgraph wlan0 12,210 3f3f3f 5f5f5f}
+
+${voffset -800}${offset 1100}Météo
+${voffset 2}${offset 1110}${execi 600 ~/.scripts/meteo.sh FRXX0076}${execi 120 ~/.scripts/meteo2.sh "Ville"}
+${offset 1105}Aujourd'hui : ${execi 120 ~/.scripts/meteo2.sh "Température aujourd'hui"}
+${offset 1105}${font weather-40}${voffset -30}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions aujourd'hui"}${font}${voffset -16}
+${offset 1085}${font weather-40}${execi 120 ~/.scripts/meteo2.sh "Icone"}${font}
+${offset 1105}${voffset -38}Vent : ${execi 120 ~/.scripts/meteo2.sh "Vent"}
+${offset 1105}Lever de soleil : ${execi 120 ~/.scripts/meteo2.sh "Lever de soleil"}
+${offset 1105}Coucher de soleil : ${execi 120 ~/.scripts/meteo2.sh "Coucher de soleil"}
+${offset 1105}Demain : ${execi 120 ~/.scripts/meteo2.sh "Température demain"} - ${execi 120 ~/.scripts/meteo2.sh "demain Lever soleil"} | ${execi 120 ~/.scripts/meteo2.sh "demain Coucher soleil"}
+${offset 1105}${font weather-40}${voffset -32}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions demain"}${font}
+${offset 1305}Màj : ${execi 120 ~/.scripts/meteo2.sh "MAJ"}
+
+${offset 1235}${voffset -160}${font moonphases-66}${execi 120 ~/.scripts/meteo2.sh "Lune"}${font}
+
+${offset 1205}${voffset -100}${color1}${execi 120 ~/.scripts/meteo2.sh "Lune_Texte"}${color0}
+
+#${voffset 0}${offset 75}Network (eth0)
+#${offset 75} IPv4: ${addr eth0}
+#${offset 75} Down: ${downspeed eth0} k/s  Up: ${upspeed eth0} k/s
+#${offset 75} ${downspeedgraph eth0 12,300 3f3f3f33b0dc}
+#${offset 75}${voffset -3} ${upspeedgraph eth0 12,300 3f3f3f 33b0dc}
