@@ -1,0 +1,97 @@
+! URxvt Settings
+
+URxvt*scrollBar:        False
+
+URxvt*cursorBlink:	True
+
+URxvt*urgentOnBell:     True
+
+URxvt*perl-ext-common:  default,matcher
+
+URxvt*urlLauncher:      firefox-nightly
+
+URxvt*matcher*button:   1
+URxvt*colorUL:          12
+
+URxvt*saveLines:        500
+
+URxvt*font:             -erus-erusfont-medium-*-*-*-11-*-*-*-*-*-iso10646-*
+URxvt*boldFont:         -erus-erusfont-bold-*-*-*-11-*-*-*-*-*-iso10646-*
+
+URxvt*tabbed*tabbar-fg: 8
+URxvt*tabbed*tabbar-bg: 0
+
+URxvt*tabbed*tab-fg: 7
+URxvt*tabbed*tab-bg: 0
+
+! ---------------------------------
+! (low-contrast by AddiKT1ve) // Magenta from sicpsnake
+! ---------------------------------
+
+!*background:					#191919
+!*foreground:					#ffffff
+URxvt*depth:            32
+URxvt*background:       rgba:0000/0000/0000/dcba
+URxvt*foreground:       White
+
+! ---------------------------------
+! Black
+! ---------------------------------
+
+!*color0:					#1B1B1B
+!*color8:					#555753
+
+! ---------------------------------
+! Red
+! ---------------------------------
+
+*color1:					#FF6B6B
+*color9:					#FF8D8D
+
+! ---------------------------------
+! Green
+! ---------------------------------
+
+*color2:					#A3D46E
+*color10:					#C8E7A8
+
+! ---------------------------------
+! Yellow
+! ---------------------------------
+
+*color3:					#EACA75
+*color11:					#FFD155
+
+! ---------------------------------
+! Blue
+! ---------------------------------
+
+*color4:					#435E87
+*color12:					#587AA4
+
+! ---------------------------------
+! Magenta
+! ---------------------------------
+
+*color5:					#925372
+*color13:					#E165A1
+
+! ---------------------------------
+! Cyan
+! ---------------------------------
+
+*color6:					#789EC6
+*color14:					#46A4FF
+
+! ---------------------------------
+! White
+! ---------------------------------
+
+!*color7:					#ABABAB
+!*color15:					#ABABAB
+
+! xterm try for a nice launcher
+
+xterm*background: #3f3f3f
+xterm*foreground: #bebebe
+xterm*faceName: -*-snap-*-*-*-*-*-*-8-*-*-*-*-*-*-*
