@@ -1,0 +1,9 @@
+TEXT
+Hostname: $nodename - \
+OS: $conky_build_arch - \
+CPU: ${exec uname -p | sed 's/(tm)/™/g;s/X/×/g;s/Dual Core Processor//g;s/  / /g'} ($freq Mhz) - \
+Processes: $processes - \
+Uptime: $uptime_short - \
+Load average: ${loadavg 1} - \
+Memory Usage: $mem/$memmax ($memperc%) - \
+Disk Usage: $fs_used/$fs_size ($fs_used_perc%)
