@@ -106,7 +106,7 @@ ${offset 152} Uptime: $uptime  Load: $loadavg
 
 ${voffset 7}${offset 1145}Power
 ${offset 1145} The power supply is $acpiacadapter
-${offset 1145} ${if_match ${battery_short BAT1} == U}discharging ${exec echo `cut -c 1-4 /sys/class/power_supply/BAT1/charge_now`/32 | bc}%${else}${battery BAT1}${endif}
+${offset 1145} ${execi 2 /home/erus/.scripts/battery.sh}
 
 ${voffset -7}${offset 300}CPU - GPU
 ${offset 300} Frequency: $freq_g GHz
