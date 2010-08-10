@@ -1,6 +1,6 @@
 TEXT
 Hostname: $nodename - \
-OS: $conky_build_arch - \
+OS: ${exec echo "`uname -o` `uname -r` (`uname -m`)"} - \
 CPU: ${exec uname -p | sed 's/(tm)/™/g;s/X/×/g;s/Dual Core Processor//g;s/  / /g'} ($freq Mhz) - \
 Processes: $processes - \
 Uptime: $uptime_short - \
