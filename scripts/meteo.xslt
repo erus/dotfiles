@@ -14,7 +14,7 @@ MAJ : </xsl:text><xsl:value-of select="/weather/loc/tm"/>
 
         <xsl:template match="cc">
             <xsl:text>
-Icone : </xsl:text><xsl:value-of select="tmp"/>
+Icone_Temp : </xsl:text><xsl:value-of select="tmp"/>
             <xsl:text>
 Température aujourd'hui : </xsl:text><xsl:value-of select="tmp"/>°<xsl:value-of select="/weather/head/ut"/>
             <xsl:if test="tmp != flik">
@@ -34,7 +34,7 @@ Vent aujourd'hui : </xsl:text>
                 <xsl:value-of select="/weather/head/us"/>
             <xsl:text> - </xsl:text><xsl:value-of select="wind/t"/>
             <xsl:text>
-Lune : </xsl:text><xsl:value-of select="moon/icon"/>
+Lune_Icone : </xsl:text><xsl:value-of select="moon/icon"/>
             <xsl:text>
 Lune_Texte : </xsl:text><xsl:value-of select="moon/t"/>
         </xsl:template>

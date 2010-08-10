@@ -121,15 +121,15 @@ elif echo "$1" | grep -i -q 'vent'; then
     RESULTAT=$(echo "$RESULTAT" | sed 's/W/O/g')
 
 # Transformation de la température en icone
-elif echo "$1" | grep -i -q 'icone'; then
+elif echo "$1" | grep -i -q 'icone_temp'; then
     RESULTAT=$(echo "$RESULTAT" | sed 's/1[0-9]/y/g;s/[2-9][0-9]/z/g;s/[0-9]/y/g;s/*[0-9]*/x/g')
 
 #Traduction du nom de la phase de la lune en fr.
-elif echo "$1" | grep -i -q 'lune_texte'; then
-    RESULTAT=$(echo "$RESULTAT" | sed 's/New Moon/Nouvelle Lune/g;s/Waxing Crescent/Premier Croissant/g;s/First Quarter/Premier Quartier/g;s/Waxing Gibbous/Gibbeuse Croissante/g;s/Full Moon/Pleine Lune/g;s/Full/Pleine Lune/g;s/Waning Gibbous/Gibbeuse Décroissante/g;s/Last Quarter/Dernier Quartier/g;s/Waning Crescent/Dernier Croissant/g')
+elif echo "$1" | grep -i -q 'Lune_Texte'; then
+    RESULTAT=$(echo "$RESULTAT" | sed 's/New/Nouvelle Lune/g;s/New Moon/Nouvelle Lune/g;s/Waxing Crescent/Premier Croissant/g;s/First Quarter/Premier Quartier/g;s/Waxing Gibbous/Gibbeuse Croissante/g;s/Full Moon/Pleine Lune/g;s/Full/Pleine Lune/g;s/Waning Gibbous/Gibbeuse Décroissante/g;s/Last Quarter/Dernier Quartier/g;s/Waning Crescent/Dernier Croissant/g')
 
 # Transformation du numero de l'icone de la lune en lettre
-elif echo "$1" | grep -i -q 'lune'; then
+elif echo "$1" | grep -i -q 'Lune_Icone'; then
     RESULTAT=$(echo "$RESULTAT" | sed 's/20/r/g;s/21/s/g;s/22/t/g;s/23/u/g;s/24/v/g;s/25/w/g;s/26/x/g;s/27/y/g;s/28/z/g;s/29/ /g;s/10/j/g;s/11/k/g;s/12/l/g;s/13/m/g;s/14/+/g;s/15/+/g;s/16/n/g;s/17/o/g;s/18/p/g;s/19/q/g;s/0/ /g;s/1/a/g;s/2/b/g;s/3/c/g;s/4/d/g;s/5/e/g;s/6/f/g;s/7/g/g;s/8/h/g;s/9/i/g')
 
 fi
