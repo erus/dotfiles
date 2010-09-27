@@ -4,7 +4,7 @@
 SRCFILE=/tmp/conky_meteo.txt
 
 LEVER=$(grep "Lever de soleil" $SRCFILE | sed 's/AM//g' | cut -d : -f 2,3 | sed 's/ //g;s/://g')
-COUCHER=$(calc `grep "Coucher de soleil" $SRCFILE | cut -d : -f 2` + 12 | sed 's/\t//g')$(grep "Coucher de soleil" $SRCFILE | sed 's/PM//g' | cut -d : -f 3)
+COUCHER=$(echo `grep "Coucher de soleil" $SRCFILE | cut -d : -f 2` + 12 | bc)$(grep "Coucher de soleil" $SRCFILE | sed 's/PM//g' | cut -d : -f 3)
 
 # Traitement
 RESULTAT=$(grep "$1" $SRCFILE | awk -F " : " '{print $2}')
@@ -31,7 +31,7 @@ if echo "$1" | grep -i -q 'conditions aujourd'; then
             RESULTAT='d' ; else
                 RESULTAT='n'
         fi
-    elif echo "$RESULTAT" | grep -i -q 'fog'; then
+    elif echo "$RESULTAT" | grep -E -i -q 'fog|mist'; then
         if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
             RESULTAT='d' ; else
                 RESULTAT='n'
