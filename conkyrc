@@ -116,26 +116,30 @@ ${offset 300} Load: $cpu%
 ${offset 300} ${cpugraph cpu0 24,256 3f3f3f 5f5f5f}
 
 ${voffset -63}${offset 1105}WiFi (wlan0) - ${wireless_essid wlan0}
-${offset 1105} IPv4: ${tail /tmp/.ip 1} - Ping: ${execi 20 ping=`ping -c 1 -w 10 google.fr | grep 64 | sed 's/.*time=\([0-9]*\.[0-9]\).*/\1/g'` ; [ -n $ping ] && echo $ping || echo 'Fail'  }
+${offset 1105} IPv4: ${tail /tmp/.ip 1} - Ping: ${execi 20 ping=`ping -c 1 -w 10 google.fr | grep 64 | sed 's/.*time=\(.*\) ms/\1/g'` ; [ -n $ping ] && echo $ping || echo 'Fail'  }
 ${offset 1105} Down: ${downspeedf wlan0} k/s  Up: ${upspeedf wlan0} k/s
 ${offset 1105} ${downspeedgraph wlan0 12,210 3f3f3f 5f5f5f}
 ${offset 1105}${voffset -3} ${upspeedgraph wlan0 12,210 3f3f3f 5f5f5f}
 
-${voffset -800}${offset 1100}Météo
-${voffset 2}${offset 1110}${execi 600 ~/.scripts/meteo.sh FRXX0076}${execi 120 ~/.scripts/meteo2.sh "Ville"}
+${voffset -775}${offset 1100} Météo
+${offset 1110}${execi 600 ~/.scripts/meteo.sh FRXX0076}${execi 120 ~/.scripts/meteo2.sh "Ville"}
 ${offset 1105}Aujourd'hui : ${execi 120 ~/.scripts/meteo2.sh "Température aujourd'hui"}
-${offset 1105}${font weather-40}${voffset -30}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions aujourd'hui"}${font}${voffset -16}
-${offset 1085}${font weather-40}${execi 120 ~/.scripts/meteo2.sh "Icone_Temp"}${font}
-${offset 1105}${voffset -38}Vent : ${execi 120 ~/.scripts/meteo2.sh "Vent"}
+${offset 1105}Vent : ${execi 120 ~/.scripts/meteo2.sh "Vent"}
 ${offset 1105}Lever de soleil : ${execi 120 ~/.scripts/meteo2.sh "Lever de soleil"}
 ${offset 1105}Coucher de soleil : ${execi 120 ~/.scripts/meteo2.sh "Coucher de soleil"}
 ${offset 1105}Demain : ${execi 120 ~/.scripts/meteo2.sh "Température demain"} - ${execi 120 ~/.scripts/meteo2.sh "demain Lever soleil"} | ${execi 120 ~/.scripts/meteo2.sh "demain Coucher soleil"}
-${offset 1105}${font weather-40}${voffset -32}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions demain"}${font}
+${voffset -65}
+${offset 1085}${font weather-40}${execi 120 ~/.scripts/meteo2.sh "Icone_Temp"}${font}
+${voffset -55}
+${offset 1105}${font weather-40}${voffset -45}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions aujourd'hui"}${font}
+${voffset 25}
+${offset 1105}${font weather-40}${voffset -40}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions demain"}${font}
+
 ${offset 1305}Màj : ${execi 120 ~/.scripts/meteo2.sh "MAJ"}
 
-${offset 1235}${voffset -175}${font moonphases-66}${execi 120 ~/.scripts/meteo2.sh "Lune_Icone"}${font}
-
-${offset 1205}${voffset -105}${color1}${execi 120 ~/.scripts/meteo2.sh "Lune_Texte"}${color0}
+${voffset -205}
+${offset 1205}${color1}${execi 120 ~/.scripts/meteo2.sh "Lune_Texte"}${color0}
+${offset 1235}${font moonphases-66}${execi 120 ~/.scripts/meteo2.sh "Lune_Icone"}${font}
 
 #${voffset 0}${offset 75}Network (eth0)
 #${offset 75} IPv4: ${addr eth0}
