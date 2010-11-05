@@ -11,7 +11,22 @@ RESULTAT=$(grep "$1" $SRCFILE | awk -F " : " '{print $2}')
 
 # Transformation de la condition en lettre qui deviendra une icône
 if echo "$1" | grep -i -q 'conditions aujourd'; then
-    if echo "$RESULTAT" | grep -i -q 'partly cloudy'; then
+    if echo "$RESULTAT" | egrep -i -q 'fog|mist'; then
+        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
+            RESULTAT='d' ; else
+                RESULTAT='n'
+        fi
+    elif echo "$RESULTAT" | egrep -i -q 'storm|thunder'; then
+        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
+            RESULTAT='i' ; else
+                RESULTAT='s'
+        fi
+    elif echo "$RESULTAT" | egrep -i -q 'shower|drizzle'; then
+        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
+            RESULTAT='g' ; else
+                RESULTAT='q'
+        fi
+    elif echo "$RESULTAT" | grep -i -q 'partly cloudy'; then
         if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
             RESULTAT='c' ; else
                 RESULTAT='m'
@@ -31,16 +46,6 @@ if echo "$1" | grep -i -q 'conditions aujourd'; then
             RESULTAT='d' ; else
                 RESULTAT='n'
         fi
-    elif echo "$RESULTAT" | grep -E -i -q 'fog|mist'; then
-        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
-            RESULTAT='d' ; else
-                RESULTAT='n'
-        fi
-    elif echo "$RESULTAT" | grep -E -i -q 'storm|thunder'; then
-        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
-            RESULTAT='i' ; else
-                RESULTAT='s'
-        fi
     elif echo "$RESULTAT" | grep -i -q 'snow'; then
         if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
             RESULTAT='k' ; else
@@ -51,11 +56,6 @@ if echo "$1" | grep -i -q 'conditions aujourd'; then
             RESULTAT='h' ; else
                 RESULTAT='r'
         fi
-    elif echo "$RESULTAT" | grep -i -q 'shower'; then
-        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
-            RESULTAT='g' ; else
-                RESULTAT='q'
-        fi
     fi
 
 # Transformation de la condition en lettre qui deviendra une icône
@@ -63,7 +63,13 @@ elif echo "$1" | grep -i -q 'conditions demain'; then
 
     RESULTAT=`echo $RESULTAT | sed 's/AM//g;s/PM//g;s/ //g;s|/| |g'`
 
-    if echo "$RESULTAT" | grep -i -q 'partly cloudy'; then
+    if echo "$RESULTAT" | egrep -i -q 'fog|mist'; then
+        RESULTAT='='
+    elif echo "$RESULTAT" | egrep -i -q 'storm|thunder'; then
+        RESULTAT='i'
+    elif echo "$RESULTAT" | egrep -i -q 'shower|drizzle'; then
+        RESULTAT='g'
+    elif echo "$RESULTAT" | grep -i -q 'partly cloudy'; then
         RESULTAT='c'
     elif echo "$RESULTAT" | grep -i -q 'fair'; then
         RESULTAT='b'
@@ -71,16 +77,10 @@ elif echo "$1" | grep -i -q 'conditions demain'; then
         RESULTAT='C'
     elif echo "$RESULTAT" | grep -i -q 'cloud'; then
         RESULTAT='d'
-    elif echo "$RESULTAT" | grep -i -q 'fog'; then
-        RESULTAT='='
-    elif echo "$RESULTAT" | grep -E -i -q 'storm|thunder'; then
-        RESULTAT='i'
     elif echo "$RESULTAT" | grep -i -q 'snow'; then
         RESULTAT='k'
     elif echo "$RESULTAT" | grep -i -q 'rain'; then
         RESULTAT='h'
-    elif echo "$RESULTAT" | grep -i -q 'shower'; then
-        RESULTAT='g'
     fi
 
 # Transformation des heures à l'américaine (5:50 AM) en heures à la française (5h50)
@@ -88,7 +88,7 @@ elif echo "$1" | grep -i -q 'soleil'; then
     RESULTAT=$(echo "$RESULTAT" | awk '{print $1}' | sed -e s/:/h/g)
 
     # Transformation des heures PM (9h38 PM) en heures françaises (21h38)
-    if echo "$1" | grep -E -i -q 'coucher'; then
+    if echo "$1" | egrep -i -q 'coucher'; then
         HEURES=$(echo "$RESULTAT" | awk -F "h" '{print $1}')
         MINUTES=$(echo "$RESULTAT" | awk -F "h" '{print $2}')
         HEURES=$(($HEURES + 12))

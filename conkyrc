@@ -128,19 +128,24 @@ ${offset 1105}Vent : ${execi 120 ~/.scripts/meteo2.sh "Vent"}
 ${offset 1105}Lever de soleil : ${execi 120 ~/.scripts/meteo2.sh "Lever de soleil"}
 ${offset 1105}Coucher de soleil : ${execi 120 ~/.scripts/meteo2.sh "Coucher de soleil"}
 ${offset 1105}Demain : ${execi 120 ~/.scripts/meteo2.sh "Température demain"} - ${execi 120 ~/.scripts/meteo2.sh "demain Lever soleil"} | ${execi 120 ~/.scripts/meteo2.sh "demain Coucher soleil"}
-${voffset -65}
-${offset 1085}${font weather-40}${execi 120 ~/.scripts/meteo2.sh "Icone_Temp"}${font}
 ${voffset -55}
-${offset 1105}${font weather-40}${voffset -45}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions aujourd'hui"}${font}
+${offset 1085}${font Weather-40}${execi 120 ~/.scripts/meteo2.sh "Icone_Temp"}${font}
+${voffset -55}
+${offset 1105}${font Weather-40}${voffset -45}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions aujourd'hui"}${font}
 ${voffset 25}
-${offset 1105}${font weather-40}${voffset -40}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions demain"}${font}
+${offset 1105}${font Weather-40}${voffset -40}${offset 230}${execi 120 ~/.scripts/meteo2.sh "Conditions demain"}${font}
 
+${voffset -25}
 ${offset 1305}Màj : ${execi 120 ~/.scripts/meteo2.sh "MAJ"}
 
-${voffset -205}
+${voffset -200}
 ${offset 1205}${color1}${execi 120 ~/.scripts/meteo2.sh "Lune_Texte"}${color0}
-${offset 1235}${font moonphases-66}${execi 120 ~/.scripts/meteo2.sh "Lune_Icone"}${font}
+${offset 1235}${font MoonPhases-66}${execi 120 ~/.scripts/meteo2.sh "Lune_Icone"}${font}
 
+#${voffset -155}
+#${font FFFTusj-66}${time %H:%M}${font}
+#
+#
 #${voffset 0}${offset 75}Network (eth0)
 #${offset 75} IPv4: ${addr eth0}
 #${offset 75} Down: ${downspeed eth0} k/s  Up: ${upspeed eth0} k/s
