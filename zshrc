@@ -12,6 +12,7 @@ fi
 echo "$DISTRO$SPACE$SLOGAN"
 for i in DISTRO SPACE SLOGAN ; do unset $i ; done
 }
+#You'll have to adapt next line.
 [ -z "$DISPLAY" ] || [ "`wmfs -g layout`" = 'Current layout:  \i[9;5;9;7;~/.config/wmfs/wh/tg.png]\' ] || welcome_arch
 trap clear EXIT
 
