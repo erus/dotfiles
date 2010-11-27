@@ -12,8 +12,12 @@ fi
 echo "$DISTRO$SPACE$SLOGAN"
 for i in DISTRO SPACE SLOGAN ; do unset $i ; done
 }
-#You'll have to adapt next line.
-[ -z "$DISPLAY" ] || [ "`wmfs -g layout`" = 'Current layout:  \i[9;5;9;7;~/.config/wmfs/wh/tg.png]\' ] || welcome_arch
+#You'll have to adapt next lines.
+if [ -n "$DISPLAY" ] ; then
+  if [ "`wmfs -g layout 2> /dev/null`" = 'Current layout:  \i[9;5;9;7;~/.config/wmfs/icons/wh/fr.png]\' ] ; then
+    welcome_arch
+  fi
+fi
 trap clear EXIT
 
 setopt extendedglob
