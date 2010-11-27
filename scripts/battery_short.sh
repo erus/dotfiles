@@ -7,12 +7,11 @@ if [ -d /sys/class/power_supply/${BAT}/ ] ; then
 	BAT=`cat /sys/class/power_supply/${BAT}/status`
 	if [ "$BAT" = 'Discharging' ] ; then
 		RETURN="D ${PERCENT}%"
-	elif [ "$BAT" = 'Unknown' ] ; then
-		if [ "$PERCENT" -eq 100 ] ; then
-			RETURN='AC'
-		fi
 	elif [ "$BAT" = 'Charging' ] ; then
 		RETURN="C ${PERCENT}%"
+	fi
+	if [ "$PERCENT" -eq 100 ] ; then
+		RETURN='AC'
 	fi
 else
 	RETURN='N/A'
