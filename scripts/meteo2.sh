@@ -122,7 +122,7 @@ elif echo "$1" | grep -i -q 'vent'; then
 
 # Transformation de la température en icone
 elif echo "$1" | grep -i -q 'icone_temp'; then
-    RESULTAT=$(echo "$RESULTAT" | sed 's/-//g;s/1[0-9]/y/g;s/[2-9][0-9]/z/g;s/[0-9]/y/g;s/*[0-9]*/x/g')
+    RESULTAT=$(echo "$RESULTAT" | sed 's/1[0-9]/y/g;s/[2-9][0-9]/z/g;s/[0-9]/y/g;s/.*[0-9]*/x/g')
 
 #Traduction du nom de la phase de la lune en fr.
 elif echo "$1" | grep -i -q 'Lune_Texte'; then
