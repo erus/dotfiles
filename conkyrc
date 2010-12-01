@@ -115,8 +115,8 @@ ${offset 300} Temperature GPU: ${exec /home/erus/.scripts/tempcg} C
 ${offset 300} Load: $cpu%
 ${offset 300} ${cpugraph cpu0 24,256 3f3f3f 5f5f5f}
 
-${voffset -63}${offset 1105}WiFi (wlan0) - ${wireless_essid wlan0}
-${offset 1105} IPv4: ${tail /tmp/.ip 1} - Ping: ${execi 20 ping=`ping -c 1 -w 10 google.fr | grep 64 | sed 's/.*time=\(.*\) ms/\1/g'` ; [ -n $ping ] && echo $ping || echo 'Fail'  }
+${voffset -63}${offset 1105}WiFi (wlan0) - ${wireless_essid wlan0} - ${wireless_link_qual_perc wlan0}%
+${offset 1105} IPv4: ${tail /tmp/.ip 1} - Ping: ${execi 20 ping=`ping -c 1 -w 10 google.fr | sed -n 's/.*time=\(.*\) ms/\1/pg'` ; [ -n $ping ] && echo $ping || echo 'Fail'  }
 ${offset 1105} Down: ${downspeedf wlan0} k/s  Up: ${upspeedf wlan0} k/s
 ${offset 1105} ${downspeedgraph wlan0 12,210 3f3f3f 5f5f5f}
 ${offset 1105}${voffset -3} ${upspeedgraph wlan0 12,210 3f3f3f 5f5f5f}
