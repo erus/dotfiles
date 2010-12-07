@@ -26,6 +26,11 @@ if echo "$1" | grep -i -q 'conditions aujourd'; then
             RESULTAT='g' ; else
                 RESULTAT='q'
         fi
+    elif echo "$RESULTAT" | egrep -i -q 'snow|sleet'; then
+        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
+            RESULTAT='k' ; else
+                RESULTAT='u'
+        fi
     elif echo "$RESULTAT" | grep -i -q 'partly cloudy'; then
         if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
             RESULTAT='c' ; else
@@ -46,11 +51,6 @@ if echo "$1" | grep -i -q 'conditions aujourd'; then
             RESULTAT='d' ; else
                 RESULTAT='n'
         fi
-    elif echo "$RESULTAT" | grep -i -q 'snow'; then
-        if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
-            RESULTAT='k' ; else
-                RESULTAT='u'
-        fi
     elif echo "$RESULTAT" | grep -i -q 'rain'; then
         if [[ `date +%k%M` -lt $COUCHER && `date +%k%M` -gt $LEVER ]] ; then
             RESULTAT='h' ; else
@@ -69,6 +69,8 @@ elif echo "$1" | grep -i -q 'conditions demain'; then
         RESULTAT='i'
     elif echo "$RESULTAT" | egrep -i -q 'shower|drizzle'; then
         RESULTAT='g'
+    elif echo "$RESULTAT" | egrep -i -q 'snow|sleet'; then
+        RESULTAT='k'
     elif echo "$RESULTAT" | grep -i -q 'partly cloudy'; then
         RESULTAT='c'
     elif echo "$RESULTAT" | grep -i -q 'fair'; then
@@ -77,8 +79,6 @@ elif echo "$1" | grep -i -q 'conditions demain'; then
         RESULTAT='C'
     elif echo "$RESULTAT" | grep -i -q 'cloud'; then
         RESULTAT='d'
-    elif echo "$RESULTAT" | grep -i -q 'snow'; then
-        RESULTAT='k'
     elif echo "$RESULTAT" | grep -i -q 'rain'; then
         RESULTAT='h'
     fi
